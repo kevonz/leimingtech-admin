@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="goodsClick_" language="groovy" pageWidth="1200" pageHeight="850" columnWidth="1160" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cce8c05d-b1fd-445c-873a-7eb09ac1dc0f">
+	<property name="ireport.zoom" value="1.000000000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="82"/>
+	<parameter name="storeId" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select * from  ((SELECT
+     `goods_name` goods_name,
+     `goods_click` goods_click
+,0 as order_flag
+FROM
+     `shop_goods` where store_id=$P{storeId}  order by goods_click desc limit 10)
+union
+(SELECT
+     '总点击数' goods_name,
+     sum(`goods_click`) goods_click
+,1 as order_flag
+FROM
+     `shop_goods` where store_id=$P{storeId})) a order by order_flag,goods_click desc ]]>
+	</queryString>
+	<field name="goods_name" class="java.lang.String">
+		<fieldDescription><![CDATA[商品名称]]></fieldDescription>
+	</field>
+	<field name="goods_click" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[商品浏览数]]></fieldDescription>
+	</field>
+	<field name="order_flag" class="java.lang.Long"/>
+	<variable name="variable1" class="java.lang.String"/>
+	<columnHeader>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="4" width="192" height="33" forecolor="#999999" backcolor="#E1FFFF" uuid="ced5f5e5-83c9-4743-99aa-90e802c2730b"/>
+				<box leftPadding="20">
+					<pen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<topPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<leftPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<bottomPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<rightPen lineWidth="1.0" lineColor="#BBBBBB"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[商品名称]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="192" y="4" width="177" height="33" forecolor="#999999" backcolor="#E1FFFF" uuid="ae40fd2c-40b7-4eb4-9691-1aaba72c17bb"/>
+				<box rightPadding="20">
+					<pen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<topPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<leftPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<bottomPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<rightPen lineWidth="1.0" lineColor="#BBBBBB"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="14" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[点击数量]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="34" splitType="Stretch">
+			<textField>
+				<reportElement mode="Transparent" x="192" y="0" width="177" height="34" forecolor="#999999" backcolor="#FFFFFF" uuid="87a9adf8-0496-4179-b746-5783bad8059e"/>
+				<box rightPadding="20">
+					<pen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<topPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<leftPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<bottomPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<rightPen lineWidth="1.0" lineColor="#BBBBBB"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{goods_click}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Transparent" x="0" y="0" width="192" height="34" forecolor="#999999" backcolor="#FFFFFF" uuid="8716a89f-9596-429c-a8be-08a1021e785c"/>
+				<box leftPadding="20">
+					<pen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<topPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<leftPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<bottomPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<rightPen lineWidth="1.0" lineColor="#BBBBBB"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{goods_name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="334" splitType="Stretch">
+			<lineChart>
+				<chart theme="aegean">
+					<reportElement x="0" y="23" width="813" height="311" uuid="b264bc55-f394-4ddb-b320-2494350dbcfb"/>
+					<box>
+						<pen lineWidth="1.0" lineColor="#BBBBBB"/>
+						<topPen lineWidth="1.0" lineColor="#BBBBBB"/>
+						<leftPen lineWidth="1.0" lineColor="#BBBBBB"/>
+						<bottomPen lineWidth="1.0" lineColor="#BBBBBB"/>
+						<rightPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					</box>
+					<chartTitle color="#999999">
+						<titleExpression><![CDATA["流量统计"]]></titleExpression>
+					</chartTitle>
+					<chartSubtitle color="#999999"/>
+					<chartLegend textColor="#999999"/>
+				</chart>
+				<categoryDataset>
+					<dataset>
+						<incrementWhenExpression><![CDATA[$F{goods_name}!="总点击数"]]></incrementWhenExpression>
+					</dataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["商品点击数统计"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{goods_name}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{goods_click}]]></valueExpression>
+						<itemHyperlink>
+							<hyperlinkWhenExpression><![CDATA[$F{goods_name}=="总点击数"]]></hyperlinkWhenExpression>
+						</itemHyperlink>
+					</categorySeries>
+				</categoryDataset>
+				<linePlot>
+					<plot/>
+					<categoryAxisFormat>
+						<axisFormat labelColor="#999999" tickLabelColor="#999999" axisLineColor="#999999"/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat labelColor="#999999" tickLabelColor="#999999" axisLineColor="#999999"/>
+					</valueAxisFormat>
+					<rangeAxisMinValueExpression><![CDATA[0]]></rangeAxisMinValueExpression>
+				</linePlot>
+			</lineChart>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,105 @@
+/*** RESET&BASE ***/
+html,body {height:100%;width:100%;*overflow-y:hidden;_overflow-x:hidden;}
+body,h1,h2,h3,h4,h5,h6,hr,p,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0;}
+body,button,input,select,textarea{font:12px/1.5 Arial,\5b8b\4f53;color:#333;}
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:500;font-family:\5FAE\8F6F\96C5\9ED1;color:#111;}
+table{border-collapse:collapse;border-spacing:0;}
+ol,ul{list-style:none;}ul li{float:left;}ol li{clear:both;}
+sup,sub{font-size:75%;line-height:0;position:relative;vertical-align:baseline;}
+sup{top:-0.5em;}sub{bottom:-0.25em;}
+a img{border:0;}img{vertical-align:middle;}
+a{color:#38f;text-decoration:none;cursor:pointer;}a:hover{color:#38f;text-decoration:underline;}
+a:active{star:expression(this.onFocus=this.blur());}
+a.more{font-family:\5b8b\4f53;font-style:normal;}a.link{font-family:\5b8b\4f53;color:#38f;}
+a.cur,a.cur:hover,.cur a,.cur a:hover{text-decoration:none;cursor:text;}
+s{display:inline-block;width:16px;height:16px;vertical-align:middle;}
+.al{text-align:left;}.ac{text-align:center;}.ar{text-align:right;}
+.fl{float:left;}.fr{float:right;}.fn{float:none;}
+.clr{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0;}
+.clf{*zoom:1;}.clf:after{content:"";height:0;display:block;clear:both;}
+.db{display:block;}.dn{display:none;}.oh{overflow:hidden;}.vh{visibility:hidden;}
+/*** 后台登录页 ***/
+.login-page{background-color:#0866c6;background-repeat:no-repeat;background-position:center top;background-size:cover;}
+.login-content{width:100%;height:100%;background:url(../images/login-dot.png) repeat;}
+.login-panel{position:absolute;z-index:2;top:50%;left:50%;width:300px; height:310px; padding:20px 40px 50px;margin:-290px 0 0 -190px;background:rgba(0,0,0,0.1);}
+.login-panel .logo{text-align:center;}
+.login-form{position:relative;padding-top:10px;}
+.login-form li{margin-top:15px;}
+.login-form input{width:260px;padding:10px;border:0;background:#fff url(../images/icon-signin.png) no-repeat;}
+.login-form .acc{padding-left:30px;background-position:-5px -1px}
+.login-form .pass{padding-left:30px;background-position:-5px -41px}
+.login-form .code{float:left;width:110px;padding-left:30px;background-position:-5px -81px}
+.login-form .code-mod{display:inline-block;width:137px;height:30px;padding:4px;margin-left:5px;background-color:#fff}
+.login-form .code-img{float:left;width:100px;height:30px;cursor:pointer;}
+.login-form .code-change{display:inline-block;width:30px;height:30px;margin-left:6px;background: url(../images/icon-signin.png) no-repeat -5px -125px;}
+.login-form button{width:100%;padding:8px 10px; border: 1px solid #f28300;border-top:1px solid #f6ad00; background-color: #f39800;font-weight:700;font-size:14px;color: #fff; text-transform: uppercase;moz-transition: all 0.2s ease-out 0s;-webkit-transition: all 0.2s ease-out 0s;transition: all 0.2s ease-out 0s;}
+.login-form button:hover{background-color: #f28300}
+.login-form label{display: inline-block; margin-top: 10px; color:#fff; vertical-align: middle}
+.login-form label input{width: auto; margin: -1px 5px 0 0; vertical-align: middle}
+.login-form .remember{padding: 0; background: none}
+.login-form .login-alert{position:absolute;top:-20px;width:100%;}
+.login-form .alert-error {border-color:#e18d9a;background-color:#f6d8d8;text-align: center; padding:5px 0;color:#da5251;}
+/** 特效 **/
+@-webkit-keyframes bounceIn{0%{opacity:0;-webkit-transform:scale(.3)}50%{opacity:1;-webkit-transform:scale(1.05)}70%{-webkit-transform:scale(.9)}100%{-webkit-transform:scale(1)}}
+@-moz-keyframes bounceIn{0%{opacity:0;-moz-transform:scale(.3)}50%{opacity:1;-moz-transform:scale(1.05)}70%{-moz-transform:scale(.9)}100%{-moz-transform:scale(1)}}
+@-o-keyframes bounceIn{0%{opacity:0;-o-transform:scale(.3)}50%{opacity:1;-o-transform:scale(1.05)}70%{-o-transform:scale(.9)}100%{-o-transform:scale(1)}}
+@keyframes bounceIn{0%{opacity:0;transform:scale(.3)}50%{opacity:1;transform:scale(1.05)}70%{transform:scale(.9)}100%{transform:scale(1)}}.bounceIn{-webkit-animation-name:bounceIn;-moz-animation-name:bounceIn;-o-animation-name:bounceIn;animation-name:bounceIn}
+.animate0 {-webkit-animation-duration: .8s;-webkit-animation-delay: 0s;-webkit-animation-timing-function: ease;-webkit-animation-fill-mode: both;-moz-animation-duration: .8s;-moz-animation-delay: 0s;-moz-animation-timing-function: ease;-moz-animation-fill-mode: both;-ms-animation-duration: .8s;-ms-animation-delay: 0s;-ms-animation-timing-function: ease;-ms-animation-fill-mode: both;animation-duration: .8s;animation-delay: 0s;animation-timing-function: ease;animation-fill-mode: both;}         
+.animate1{-webkit-animation-duration: .8s;-webkit-animation-delay: .2s;-webkit-animation-timing-function: ease;-webkit-animation-fill-mode: both;-moz-animation-duration: .8s;-moz-animation-delay: .2s;-moz-animation-timing-function: ease;-moz-animation-fill-mode: both;-ms-animation-duration: .8s;-ms-animation-delay: .2s;-ms-animation-timing-function: ease;-ms-animation-fill-mode: both;animation-duration: .8s;animation-delay: .2s;animation-timing-function: ease;animation-fill-mode: both;} 
+.animate2{-webkit-animation-duration: .8s;-webkit-animation-delay: .4s;-webkit-animation-timing-function: ease;-webkit-animation-fill-mode: both;-moz-animation-duration: .8s;-moz-animation-delay: .4s;-moz-animation-timing-function: ease;-moz-animation-fill-mode: both;-ms-animation-duration: .8s;-ms-animation-delay: .4s;-ms-animation-timing-function: ease;-ms-animation-fill-mode: both;animation-duration: .8s;animation-delay: .4s;animation-timing-function: ease;animation-fill-mode: both;} 
+.animate3{-webkit-animation-duration: .8s;-webkit-animation-delay: .6s;-webkit-animation-timing-function: ease;-webkit-animation-fill-mode: both;-moz-animation-duration: .8s;-moz-animation-delay: .6s;-moz-animation-timing-function: ease;-moz-animation-fill-mode: both;-ms-animation-duration: .8s;-ms-animation-delay: .6s;-ms-animation-timing-function: ease;-ms-animation-fill-mode: both;animation-duration: .8s;animation-delay: .6s;animation-timing-function: ease;animation-fill-mode: both;}   
+.animate4{-webkit-animation-duration: .8s;-webkit-animation-delay: .8s;-webkit-animation-timing-function: ease;-webkit-animation-fill-mode: both;-moz-animation-duration: .8s;-moz-animation-delay: .8s;-moz-animation-timing-function: ease;-moz-animation-fill-mode: both;-ms-animation-duration: .8s;-ms-animation-delay: .8s;-ms-animation-timing-function: ease;-ms-animation-fill-mode: both;animation-duration: .8s;animation-delay: .8s;animation-timing-function: ease;animation-fill-mode: both;}  
+/*** FOOTER ***/
+.footer-fixed{position:fixed;bottom:60px;left:0;width:100%;font:700 12px/1 verdana,tahoma;color:#fff;text-shadow:1px 1px 0 rgba(0,0,0,0.3);}
+.footer-wrap{position:absolute;bottom:0;left:0;width:180px;color:#999;}
+.footer{padding:10px 0;text-align:center;}
+/** FORM **/
+.pop-form-mod{padding:10px 40px;}
+.pop-form-mod .item{position:relative;padding:5px 0;padding-left:8em;border-bottom:1px solid #f5f5f5;line-height:34px;}
+.pop-form-mod .item-btn{padding:10px 0 30px;padding-left:8em;border-top:1px solid #fff;}
+.pop-form-mod .must{display:inline-block;width:10px;margin-left:-10px;color:red;font:normal 12px \5b8b\4f53}
+.pop-form-mod .tit{display:block;position:absolute;left:0;color:#666}
+.pop-form-mod .text-s,.pop-form-mod .text,.pop-form-mod .text-l,.pop-form-mod .text-dis,.pop-form-mod .textarea{margin-right:10px;}
+.pop-form-mod .textarea{float:left}
+.pop-form-mod .note{color:#999;}
+.pop-form-mod .mr{margin-right:20px;}
+.form-mod{margin-top:20px;padding:0 40px;border:1px solid #ddd;background-color:#f8f8f8;}
+.form-mod .item{position:relative;padding:10px 0;padding-left:8em;border-top:1px solid #fff;border-bottom:1px solid #eee;line-height:34px; overflow:hidden;*zoom:1}
+.form-mod .item-btn{padding:10px 0 30px;padding-left:8em;border-top:1px solid #fff;}
+.form-mod .must{display:inline-block;width:10px;margin-left:-10px;color:red;font:normal 12px \5b8b\4f53}
+.form-mod .tit{display:block;position:absolute;left:0;color:#666}
+.form-mod .text-s,.form-mod .text,.form-mod .text-l,.form-mod .text-dis,.form-mod .textarea{margin-right:10px;}
+.form-mod .textarea{float:left}
+.form-mod .note{color:#999;}
+.form-mod .error{color:#f7511f;}
+.form-mod .error s{ background-position:-32px -32px;margin-right:3px;}
+.form-mod .mr{margin-right:20px;}
+.text-s,.text,.text-l,.text-dis,.textarea,.select,.select-l{padding:5px;border:1px solid #ccc; background-color:#fff}
+.text-s,.text,.text-l,.text-dis{line-height:22px;height:22px;}
+.text-s{width:100px;}.text{width:200px;}.text-l{width:400px;}
+.text-s:hover,.text:hover,.text-l:hover,.select:hover,.select-l:hover,.textarea:hover{border-color:#999;}
+.text-s:focus,.text:focus,.text-l:focus,.select:focus,.select-l:focus,.textarea:focus{border-color:#38f;}
+.text-dis{width:200px;border:1px solid #ddd;background-color:#eee;color:#333;}
+.textarea{width:400px;height:100px;}
+.select{width:110px;height:34px;*height:auto;}.select-l{width:210px;height:34px;*height:auto;}
+.radio{margin:-1px 5px 0 0;*margin:0 2px 0 0;}
+.checkbox{margin:-1px 5px 0 0;*margin:0 2px 0 0;}
+button,input,select,textarea{vertical-align:middle;}
+button{vertical-align:middle;cursor:pointer;*overflow:visible;}
+button:focus,input:focus,select:focus,textarea:focus{outline:0;}
+button::-moz-focus-inner,input[type="reset"]::-moz-focus-inner,input[type="button"]::-moz-focus-inner,input[type="submit"]::-moz-focus-inner,input[type="file"]>input[type="button"]::-moz-focus-inner{border:none;padding:0;}
+/* btn */
+.btng-s,.btnb-s,.btna-s,.btng,.btnb,.btna,.btng-l,.btnb-l,.btna-l{font-family:\5b8b\4f53;_font-family:Tahoma;color:#fff;font-weight:700;display:inline-block;*overflow:visible;cursor:pointer;-webkit-box-shadow:1px 1px 2px rgba(0,0,0,.1);-moz-box-shadow:1px 1px 2px rgba(0,0,0,.1);box-shadow:1px 1px 2px rgba(0,0,0,.1);text-shadow:0 -1px 0 rgba(0,0,0,0.2);opacity:1;filter:alpha(opacity=100);}
+.btng-s,.btnb-s,.btna-s{font-size:12px;font-weight:normal;padding:0 12px;line-height:24px;height:24px;line-height:20px\9;_line-height:19px;_height:19px;}
+a.btng-s,a.btnb-s,a.btna-s{line-height:22px;height:22px;padding:0 11px;}
+.btng,.btnb,.btna{font-size:14px;padding:0 22px;line-height:34px;height:34px;line-height:30px\9;_line-height:29px;_height:29px;}
+a.btng,a.btnb,a.btna{line-height:32px;height:32px;padding:0 23px;}
+.btng-l,.btnb-l,.btna-l{font-size:18px;font-family:\5FAE\8F6F\96C5\9ED1;padding:0 32px;line-height:44px;height:44px;line-height:40px\9;_line-height:39px;_height:39px;}
+a.btng-l,a.btnb-l,a.btna-l{line-height:42px;height:42px;padding:0 29px;}
+/* btn颜色 */
+.btng-s,.btng,.btng-l{color:#333;border:1px solid #ddd;border-bottom-color:#bbb;background-color:#f5f5f5;}
+.btnb-s,.btnb,.btnb-l{border:1px solid #05b;border-bottom-color:#048;background-color:#06c;}
+.btna-s,.btna,.btna-l{border:1px solid #e80;border-bottom-color:#c70;background-color:#f90;}
+.btng-s:hover,.btnb-s:hover,.btna-s:hover,.btng:hover,.btnb:hover,.btna:hover,.btng-l:hover,.btnb-l:hover,.btna-l:hover{color:#fff;text-decoration:none;opacity:.85;filter:alpha(opacity=85);}
+.btng-s:hover,.btng:hover,.btng-l:hover{color:#333;}
+.btng-s:active,.btnb-s:active,.btna-s:active,.btng:active,.btnb:active,.btna:active,.btng-l:active,.btnb-l:active,.btna-l:active{-webkit-box-shadow:inset 2px 2px 3px rgba(0,0,0,.15);-moz-box-shadow:inset 1px 1px 2px rgba(0,0,0,.15);box-shadow:inset 2px 2px 3px rgba(0,0,0,.15);}

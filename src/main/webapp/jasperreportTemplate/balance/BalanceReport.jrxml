@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="balanceTemlate" language="groovy" columnDirection="RTL" pageWidth="1200" pageHeight="850" columnWidth="1160" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cce8c05d-b1fd-445c-873a-7eb09ac1dc0f">
+	<property name="ireport.zoom" value="0.6209213230591605"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="storeId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dateFormat" class="java.lang.String">
+		<defaultValueExpression><![CDATA["%Y-%m-%d"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[(select FROM_UNIXTIME(finnshed_time/1000,$P{dateFormat}) date,sum(goods_amount) as '商品总价格', sum(discount) as '折扣价格' ,sum(order_amount) as '支付金额' , sum(goods_amount+shipping_fee)as '订单总金额',sum(shipping_fee) as '运费价格' ,sum(voucher_price) as '代金券金额' from shop_order s_order where  payment_state=1 and order_state=40 AND STORE_ID=$P{storeId} GROUP BY FROM_UNIXTIME(finnshed_time/1000,$P{dateFormat}))
+
+union
+(
+select "总计" as date,sum(goods_amount) as '商品总价格', sum(discount) as '折扣价格' ,sum(order_amount) as '支付金额' , sum(goods_amount+shipping_fee)as '订单总金额',sum(shipping_fee) as '运费价格' ,sum(voucher_price) as '代金券金额' from shop_order s_order where  payment_state=1 and order_state=40 AND STORE_ID=$P{storeId}
+)]]>
+	</queryString>
+	<field name="date" class="java.lang.String">
+		<fieldDescription><![CDATA[销售日期]]></fieldDescription>
+	</field>
+	<field name="商品总价格" class="java.math.BigDecimal"/>
+	<field name="折扣价格" class="java.math.BigDecimal"/>
+	<field name="支付金额" class="java.math.BigDecimal"/>
+	<field name="订单总金额" class="java.math.BigDecimal"/>
+	<field name="运费价格" class="java.math.BigDecimal"/>
+	<field name="代金券金额" class="java.math.BigDecimal"/>
+	<columnHeader>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="27" y="4" width="100" height="33" forecolor="#999999" backcolor="#E1FFFF" uuid="a7dd782c-4147-4f95-89a7-184c28bc6a6c"/>
+				<box rightPadding="0">
+					<pen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<topPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<leftPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<bottomPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<rightPen lineWidth="1.0" lineColor="#BBBBBB"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[订单完成日期]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="127" y="4" width="100" height="33" forecolor="#999999" backcolor="#E1FFFF" uuid="bacd3295-95c4-4bd5-ae8e-695f06c07000"/>
+				<box rightPadding="0">
+					<pen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<topPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<leftPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<bottomPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<rightPen lineWidth="1.0" lineColor="#BBBBBB"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[商品总价格]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="227" y="4" width="100" height="33" forecolor="#999999" backcolor="#E1FFFF" uuid="0a463fac-0cb2-42f6-83d4-f3850fd8a588"/>
+				<box rightPadding="0">
+					<pen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<topPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<leftPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<bottomPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<rightPen lineWidth="1.0" lineColor="#BBBBBB"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[折扣价格]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="327" y="4" width="100" height="33" forecolor="#999999" backcolor="#E1FFFF" uuid="0243c0c5-e33b-4c8b-926d-8c718e50756f"/>
+				<box rightPadding="0">
+					<pen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<topPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<leftPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<bottomPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<rightPen lineWidth="1.0" lineColor="#BBBBBB"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[支付金额]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="427" y="4" width="100" height="33" forecolor="#999999" backcolor="#E1FFFF" uuid="6c4fe1bf-a00b-45d3-905e-4959b91b0cb1"/>
+				<box rightPadding="0">
+					<pen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<topPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<leftPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<bottomPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<rightPen lineWidth="1.0" lineColor="#BBBBBB"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[订单总金额]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="627" y="4" width="100" height="33" forecolor="#999999" backcolor="#E1FFFF" uuid="1b96d740-a756-4443-9205-190bbe6ca2d6"/>
+				<box rightPadding="0">
+					<pen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<topPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<leftPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<bottomPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<rightPen lineWidth="1.0" lineColor="#BBBBBB"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[运费价格]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="527" y="4" width="100" height="33" forecolor="#999999" backcolor="#E1FFFF" uuid="8971b31f-f416-4fdc-bdb5-08ed128b9e13"/>
+				<box rightPadding="0">
+					<pen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<topPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<leftPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<bottomPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<rightPen lineWidth="1.0" lineColor="#BBBBBB"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[代金券金额]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="33" splitType="Stretch">
+			<textField>
+				<reportElement x="27" y="0" width="100" height="33" forecolor="#999999" uuid="fad5fe37-42bd-450e-b296-b481391da021"/>
+				<box rightPadding="20">
+					<pen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<topPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<leftPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<bottomPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<rightPen lineWidth="1.0" lineColor="#BBBBBB"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{date}==null?"未知日期":$F{date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="127" y="0" width="100" height="33" forecolor="#999999" uuid="c95f1bd3-8c93-4ef4-a5cd-c5493b07e385"/>
+				<box rightPadding="20">
+					<pen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<topPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<leftPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<bottomPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<rightPen lineWidth="1.0" lineColor="#BBBBBB"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{商品总价格}==null?0:$F{商品总价格}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="227" y="0" width="100" height="33" forecolor="#999999" uuid="0136726a-3426-42f6-ba2d-ddbf1712bd15"/>
+				<box rightPadding="20">
+					<pen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<topPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<leftPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<bottomPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<rightPen lineWidth="1.0" lineColor="#BBBBBB"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{折扣价格}==null?0:$F{折扣价格}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="327" y="0" width="100" height="33" forecolor="#999999" uuid="2dab8f91-1c93-4d13-855d-8544fbbc1ee8"/>
+				<box rightPadding="20">
+					<pen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<topPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<leftPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<bottomPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<rightPen lineWidth="1.0" lineColor="#BBBBBB"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{支付金额}==null?0:$F{支付金额}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="427" y="0" width="100" height="33" forecolor="#999999" uuid="0d068065-e6a6-4387-b114-645a4f22dfdd"/>
+				<box rightPadding="20">
+					<pen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<topPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<leftPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<bottomPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<rightPen lineWidth="1.0" lineColor="#BBBBBB"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{订单总金额}==null?0:$F{订单总金额}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="627" y="0" width="100" height="33" forecolor="#999999" uuid="0dc1ad65-717a-4870-ba40-95967e20afe7"/>
+				<box rightPadding="20">
+					<pen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<topPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<leftPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<bottomPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<rightPen lineWidth="1.0" lineColor="#BBBBBB"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{运费价格}==null?0:$F{运费价格}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="527" y="0" width="100" height="33" forecolor="#999999" uuid="2f265361-7fd5-4510-9619-40d1ce11bef7"/>
+				<box rightPadding="20">
+					<pen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<topPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<leftPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<bottomPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					<rightPen lineWidth="1.0" lineColor="#BBBBBB"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{代金券金额}==null?0:$F{代金券金额}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="334" splitType="Stretch">
+			<lineChart>
+				<chart isShowLegend="true" theme="aegean">
+					<reportElement mode="Transparent" x="27" y="23" width="700" height="311" forecolor="#999999" uuid="b264bc55-f394-4ddb-b320-2494350dbcfb"/>
+					<box>
+						<pen lineWidth="1.0" lineColor="#BBBBBB"/>
+						<topPen lineWidth="1.0" lineColor="#BBBBBB"/>
+						<leftPen lineWidth="1.0" lineColor="#BBBBBB"/>
+						<bottomPen lineWidth="1.0" lineColor="#BBBBBB"/>
+						<rightPen lineWidth="1.0" lineColor="#BBBBBB"/>
+					</box>
+					<chartTitle position="Top" color="#999999">
+						<titleExpression><![CDATA["结算统计"]]></titleExpression>
+					</chartTitle>
+					<chartSubtitle/>
+					<chartLegend textColor="#999999" backgroundColor="#FFFFFF"/>
+				</chart>
+				<categoryDataset>
+					<dataset>
+						<incrementWhenExpression><![CDATA[$F{date}!="总计"]]></incrementWhenExpression>
+					</dataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["商品总价格"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{date}==null?"未知日期":$F{date}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{商品总价格}==null?"":$F{商品总价格}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["折扣价格"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{date}==null?"未知日期":$F{date}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{折扣价格}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["支付金额"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{date}==null?"未知日期":$F{date}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{支付金额}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["订单总金额"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{date}==null?"未知日期":$F{date}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{订单总金额}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["运费价格"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{date}==null?"未知日期":$F{date}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{运费价格}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["代金券金额"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{date}==null?"未知日期":$F{date}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{代金券金额}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<linePlot>
+					<plot backgroundAlpha="1.0" foregroundAlpha="1.0"/>
+					<categoryAxisFormat>
+						<axisFormat labelColor="#999999" tickLabelColor="#999999" verticalTickLabels="true" axisLineColor="#999999"/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat labelColor="#999999" tickLabelColor="#999999" axisLineColor="#999999"/>
+					</valueAxisFormat>
+					<rangeAxisMinValueExpression><![CDATA[0]]></rangeAxisMinValueExpression>
+				</linePlot>
+			</lineChart>
+		</band>
+	</summary>
+	<noData>
+		<band height="68">
+			<staticText>
+				<reportElement x="192" y="13" width="387" height="43" uuid="7b693255-a88e-4697-8d23-b9463c637e0b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[没有数据]]></text>
+			</staticText>
+		</band>
+	</noData>
+</jasperReport>

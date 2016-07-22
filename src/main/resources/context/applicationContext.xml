@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+    <description>Spring公共配置</description>
+
+    <context:annotation-config/>
+
+    <!-- <context:component-scan base-package="com.leimingtech.admin.module,com.leimingtech.service.module,com.leimingtech.union,com.leimingtech.gencode"> -->
+        <context:component-scan base-package="com.leimingtech.admin.module,com.leimingtech.service.module,com.leimingtech.extend.module,com.leimingtech.gencode">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+    </context:component-scan>
+
+    <!--main applicationContext file-->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+          lazy-init="false">
+        <property name="locations">
+            <list>
+                <value>classpath*:conf/jdbc.properties</value>
+                <value>classpath*:conf/leimingtech.properties</value>
+                <value>classpath*:conf/redis.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Spring AOP auto-proxy creation (required to support Shiro annotations) -->
+    <!--bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/-->
+
+    <!-- i18n Resource文件bundles -->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <value>i18n/messages</value>
+                <value>i18n/errors</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- JSR303 Validator定义 -->
+    <bean class="com.leimingtech.core.common.SpringContextUtil" lazy-init="false" />
+    <!--<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />-->
+
+    <import resource="applicationContext-db.xml"/>
+    <import resource="applicationContext-email.xml"/>
+    <import resource="applicationContext-sqlmapping.xml"/>
+    <import resource="applicationContext-shiro.xml"/>
+    <!-- redis配置 -->
+    <import resource="applicationContext-cache.xml"/>
+    
+    <!-- 定时任务 -->
+   	<!-- <import resource="applicationContext-task.xml"/> -->
+</beans>

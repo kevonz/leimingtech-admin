@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+       default-lazy-init="true">
+	<description>Shiro安全配置</description>
+
+    <!-- Shiro的主业务层:整个Shiro下Subject的处理都通过它,相当于dispatch filter -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realms">
+            <list>
+                <ref bean="accountAuthorizationRealm"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="credentialsMatcher" class="com.leimingtech.core.auth.shiro.CustomCredentialsMatcher" >
+    	<property name="hashAlgorithmName" value="SHA-1"/>
+    </bean>
+
+    <!-- Shiro都需要通过Realm获得安全数据(用户,角色,权限),相当于data source -->
+    <bean id="accountAuthorizationRealm" class="com.leimingtech.admin.utils.shiro.AccountAuthorizationRealm">
+        <property name="credentialsMatcher" ref="credentialsMatcher"/>
+    </bean>
+
+
+	 <!-- Shiro Filter 对应web.xml的配置-->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<property name="loginUrl" value="/login" /><!-- 登录地址 -->
+		<property name="filterChainDefinitions">
+			<value>
+				/unionJD/** = anon
+                /login** = anon
+                /loginCheck** = anon
+                /logout = anon
+                /generateImage = anon
+                /res/** = anon
+                /** = roles[admin]
+                
+                <!-- /** = roles[normal] -->
+                <!-- authc 是 org.apache.shiro.web.filter.authc.FormAuthenticationFilter实例-->
+                <!-- anon 是匿名用户-->
+                <!-- authc 是 org.apache.shiro.web.filter.authc.UserFilter实例-->
+                <!-- logout 是 org.apache.shiro.web.filter.authc.LogoutFilter实例-->
+                <!--/views/index.ftl = anon-->
+                <!--/views/login.ftl = anon-->
+                <!--/views/logout = logout-->
+                <!--/views/admin/** = roles[admin]-->
+                <!--/views/** = user-->
+                <!--/errors/** = anon-->
+			</value>
+		</property>
+	</bean>
+
+    <!-- Shiro生命周期处理器-->
+	<!--保证实现了Shiro内部lifecycle函数的bean执行-->
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+    <!--使用@RequiresRoles,@RequiresPermissions等注解-->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor"/>
+
+    <aop:config proxy-target-class="true"></aop:config>
+    <bean class=" org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+
+</beans>

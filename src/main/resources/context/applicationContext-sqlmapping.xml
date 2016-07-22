@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd"
+       default-lazy-init="true">
+    <description>Sql Mapping配置</description>
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+    <bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSourceProxy" />
+        <property name="configLocation" value="classpath:conf/sqlmap-config.xml" />
+        <property name="mapperLocations">
+            <list>
+               <value>classpath*:com/leimingtech/service/module/**/dao/mapper/*Mapper.xml</value>
+               <value>classpath*:com/leimingtech/extend/module/points/**/dao/mapper/*Mapper.xml</value>
+               <!-- <value>classpath*:com/leimingtech/admin/module/**/dao/mapper/*Mapper.xml</value> -->
+               <value>classpath*:mapper/**/*Mapper.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- JDBC template -->
+    <bean id="jdbcTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg>
+            <ref bean="sessionFactory"></ref>
+        </constructor-arg>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- <property name="basePackage" value="com.leimingtech.service.module.**.dao.mapper;com.leimingtech.union.dao.mapper;com.leimingtech.gencode.dao.mapper" /> -->
+         <!-- 扫描积分商城  kwg 2015-11-5-->
+        <property name="basePackage" value="com.leimingtech.service.module.**.dao.mapper;com.leimingtech.extend.module.**.dao.mapper;com.leimingtech.gencode.dao.mapper" />
+        <property name="annotationClass" value="com.leimingtech.core.orm.mybatis.SqlMapper"/>
+        <property name="sqlSessionFactoryBeanName" value="sessionFactory"/>
+        <property name="sqlSessionTemplateBeanName" value="jdbcTemplate"/>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSourceProxy"></property>
+    </bean>
+
+    <!-- 配置事务的传播特性 -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="save*" propagation="REQUIRED" />
+            <tx:method name="add*" propagation="REQUIRED" />
+            <tx:method name="update*" propagation="REQUIRED" />
+            <tx:method name="delete*" propagation="REQUIRED" />
+            <tx:method name="*" read-only="true" />
+        </tx:attributes>
+    </tx:advice>
+    <aop:config>
+     	<aop:pointcut id="allServiceMethod" expression="execution(* com.leimingtech.service..service.*.*(..)) AND execution(* com.leimingtech.extend.module..service.*.*(..)) AND execution(*  com.leimingtech.gencode.service.*.*(..))" />
+        <!-- <aop:pointcut id="allServiceMethod" expression="execution(* com.leimingtech.service..service.*.*(..)) AND execution(*  com.leimingtech.union.service.*.*(..)) AND execution(*  com.leimingtech.gencode.service.*.*(..)) " /> --> 
+        <aop:advisor pointcut-ref="allServiceMethod" advice-ref="txAdvice" />
+    </aop:config>
+
+</beans>
