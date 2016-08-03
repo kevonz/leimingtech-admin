@@ -132,6 +132,8 @@ public class GoodsClassAction {
             }
             //将idpath存进数据库
             goodsClassService.update(goodsClass);
+            //更新级层
+            goodsClassService.updatelevelbyPidAndId(goodsClass);
             model.addAttribute("referer", referer);
             model.addAttribute("msg", "新增成功");
         } else {
@@ -241,7 +243,15 @@ public class GoodsClassAction {
  			map.put(message, "true");
  			return map;
  		}
+ 		
+ 		//查询该类别的相关信息
+ 		GoodsClass goodsClass = goodsClassService.findById(Integer.valueOf(classid));
+ 		
  		goodsClassService.delete(Integer.valueOf(classid));
+ 		
+ 		//更新级别的值
+ 		goodsClassService.updatelevelbyPidAndLevelForDel(goodsClass);
+ 		
  		map.put("result", "删除成功");
  		map.put(message, "true");
  		return map;

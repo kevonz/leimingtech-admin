@@ -42,7 +42,7 @@ $(document).ready(function () {
                         }
                         src += " <span title='可编辑下级分类名称' required='1' fieldid='" + data[i].typeId + "' ajax_branch='goods_class_name' fieldname='gc_name' nc_type='inline_edit' class='editable tooltip'>" + data[i].typeName + "</span>";
                         //新增下级
-                        if (data[i].deep < 3) {
+                        if (data[i].deep < 4) {
                             src += "<a class='btn-add-nofloat marginleft' href='" + APP_BASE + "/goods/type/forward?id=0&parentId=" + data[i].typeId + "'><span>新增下级</span></a>";
                         }
                         src += "</td>";

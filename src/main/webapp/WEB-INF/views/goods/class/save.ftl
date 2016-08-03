@@ -53,6 +53,18 @@
                         <#list class.classList as c>
                             <option value="${c.gcId}" <#if flag == c.gcId>selected="selected" </#if>>
                                 &nbsp;&nbsp;&nbsp;&nbsp;${c.gcName}</option>
+                            <#list c.classList as c>
+                            	<option value="${c.gcId}" <#if flag == c.gcId>selected="selected" </#if>>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${c.gcName}</option>
+                                <#list c.classList as c>
+                            		<option value="${c.gcId}" <#if flag == c.gcId>selected="selected" </#if>>
+                                	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${c.gcName}</option>
+                                	<#list c.classList as c>
+                            			<option value="${c.gcId}" <#if flag == c.gcId>selected="selected" </#if>>
+                                		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${c.gcName}</option>
+                        			</#list>
+                        		</#list>
+                        	</#list>
                         </#list>
                     </#list>
                 </select>
