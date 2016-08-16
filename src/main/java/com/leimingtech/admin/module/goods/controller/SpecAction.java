@@ -131,4 +131,20 @@ public class SpecAction {
         specService.update(spec);
         return true;
     }
+    
+    
+    /**
+     * 删除
+     * @return
+     */
+    @RequiresPermissions("sys:spec:edit")
+    @RequestMapping("/deleteSpeVal")
+    public String  deleteSpeVal(@RequestParam int[] ids,HttpServletRequest request,Model model){
+        for(int id : ids){
+        	specValueService.deleteBySpValueId(id);
+        }
+        model.addAttribute("success", true);
+        model.addAttribute("msg", "删除成功");
+        return Constants.MSG_URL;
+    }
 }

@@ -63,6 +63,7 @@
             	<#list specValues as sv>
 		            <tr class="noborder" name="specValueDiv">
 		                <td class="vatop rowform" colspan="1.5">
+		                	<input type="hidden" name="spValueId"  value="${sv.spValueId}" />
 		                	<input type="text" name="spValueSort" placeholder="排序" value="${sv.spValueSort}" />
 		                	<input type="text" name="spValueName" placeholder="规格值" value="${sv.spValueName}" />
 		                	<p href="javascript:void(0);" style="display: none;" name="spValueImage">
@@ -76,7 +77,7 @@
 							</p>
 		                </td>
 						<td class="vatop rowform">
-		                	<a href="javascript:void(0);" onclick="deleteSpecValue(this)">移除</a>
+		                	<a href="javascript:void(0);" onclick="deleteSpecValue(this)"  spValueId = ${sv.spValueId}>移除</a>
 						</td>
 		            </tr>
 		        </#list>
@@ -145,11 +146,23 @@ function ajaxFileUploads(imageid,ob) {
 
 	//删除一个规格值
 	function deleteSpecValue(obj){
-		var len = $("[name=specValueDiv]").length
-		if(len != 1){
-			$(obj).parent().parent().remove();
+		var spValueId = $(obj).attr("spvalueid");
+    	var args = {
+			"ids":spValueId
 		}
+        var url = "${base}/goods/spec/deleteSpeVal";
+         $.post(url,args,function(data){
+                		$(".page").empty();
+                		$(".page").append(data);
+                		
+                		var len = $("[name=specValueDiv]").length
+						if(len != 1){
+							$(obj).parent().parent().remove();
+						}
+            	});
+
 	}
+	
     $(function(){
     	//初始化
     	initEdit();
@@ -271,6 +284,7 @@ function ajaxFileUploads(imageid,ob) {
         //按钮先执行验证再提交表单
         $("#submitBtn").click(function(){
             if($("#spec_form").valid()){
+            	var spValueId = $("[name=spValueId]").val();
             	var spName = $("[name=spName]").val();
             	var spFormat = $("[name=spFormat]:checked").attr("value");
             	var spSort = $("[name=spSort]").val();
@@ -284,6 +298,10 @@ function ajaxFileUploads(imageid,ob) {
             	var SpecValues = '[';
             	var tag = true;
             	$("[name=specValueDiv]").each(function(){
+            		var  spValueId = $(this).find("[name=spValueId]").val();
+            		if (spValueId==undefined){
+            			spValueId = -1 ;
+            		}
             		var spValueName = $(this).find("[name=spValueName]").val();
             		var spValueSort = $(this).find("[name=spValueSort]").val();
             		//判断是否有图片
@@ -295,9 +313,9 @@ function ajaxFileUploads(imageid,ob) {
            					layer.alert("规格值输入不合法",{icon:2});
            					return false
            				}
-            			SpecValues += '{"spValueName":"' + spValueName + '","spValueImage":"' + spValueImage + '","spValueSort":"' + spValueSort + '"},'
+            			SpecValues += '{"spValueId":' + spValueId + ',"spValueName":"' + spValueName + '","spValueImage":"' + spValueImage + '","spValueSort":"' + spValueSort + '"},'
             		}else{
-            			SpecValues += '{"spValueName":"' + spValueName + '","spValueSort":"' + spValueSort + '"},'
+            			SpecValues += '{"spValueId":' + spValueId + ',"spValueName":"' + spValueName + '","spValueSort":"' + spValueSort + '"},'
             			if(spValueName == "" || spValueName == null ||spValueSort == "" || spValueSort == null){
             				tag = false;
             				layer.alert("规格值输入不合法",{icon:2});
