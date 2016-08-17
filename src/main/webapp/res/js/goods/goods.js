@@ -477,7 +477,7 @@ var clickSpecCol = function(obj){
  */
 var initFreight = function(){
 	$("[name=goods_transfee_charge]").each(function(){
-		if($(this).val() == '${goods.goodsTransfeeCharge}'){
+		if($(this).val() == goodsFreightPrice){
 			$(this).attr("checked","checked");
 			if($(this).val() == "1"){
 				$("#whops_buyer_box").css("display","none");
@@ -777,7 +777,7 @@ var initGoodsNameAllAttr = function(){
 	//商品所在地(省)名称
 	provinceName = $("#area").find("option:selected").html();
 	//商品运费承担方式 默认 0为买家承担 1为卖家承担
-	var goodsTransfeeCharge = "";
+//	var goodsTransfeeCharge = "";
 	goodsTransfeeCharge = $("[name=goods_transfee_charge]:checked").val();
 	var transportId = "0";
 	//如果是买家承担运费
