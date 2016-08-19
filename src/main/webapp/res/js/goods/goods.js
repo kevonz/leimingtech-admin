@@ -176,8 +176,12 @@ var getTotalSku = function(){
 	//获得总库存
 	$("[name=sku]").each(function(){
 		var sku = $(this).val();
-		totalSku += parseInt(sku);
-	})
+		var total = parseInt(sku);
+		if (isNaN(total)){
+			total = 0 ;
+		}
+		totalSku += total;
+	});
 	//将总库存放入商品库存
 	$("[name=goods_storage]").attr("value",totalSku);
 };
