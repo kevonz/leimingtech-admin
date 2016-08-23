@@ -628,8 +628,8 @@ var initStoreDocument = function(){
 		<#if goodsSpecs??>
 			<#list goodsSpecs as gss>
 				<#assign gssIndex = gss_index >
-				nowIndex = '${gssIndex}';
-				if(nowIndex == index){
+				//nowIndex = '${gssIndex}';
+				//if(nowIndex == index){
 					var specStr = '${gss.specValueIdStr}';
 					var specStrArr = specStr.split(",");
 					var specIsOpen = '${gss.specIsOpen}';
@@ -641,7 +641,7 @@ var initStoreDocument = function(){
 							$(this).find("[name=isopen]").attr("checked","checked");
 						}
 					}
-				}
+				//}
 			</#list>
 		</#if>
 	});

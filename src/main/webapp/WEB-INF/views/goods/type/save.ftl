@@ -106,7 +106,7 @@
                             <td width="50px">
                                
                                 <ul class="nofloat">
-                                     <li class="left w33pre h36" style="width:1000px">
+                                     <li class="left w33pre h36" style="width:1000px; height:100%">
                                          <input class="checkitem" nc_type="change_default_spec_value" type="checkbox" value="${spec.spId}" name="specList[${temp}].spId">
                                              <span style="width:300px;margin-left: 30px;">${spec.spName}</span>
                                            	<span style="width:500px;margin-left: 100px;">${spec.spValue}</span>
