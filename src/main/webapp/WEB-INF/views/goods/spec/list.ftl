@@ -85,7 +85,7 @@
             <tr>
                 <td><input type="checkbox" class="checkall" id="checkallBottom" /></td>
                 <td id="dataFuncs" colspan="16"><label for="checkallBottom">全选</label>
-                    <a class="btn" href="JavaScript:void(0);"> <span>删除</span> </a>
+                    <a class="btn" onclick="delSpec()" href="JavaScript:void(0);"> <span>删除</span> </a>
                 <@layout.pager pager/></td>
             <tr>
             </tfoot>
