@@ -8,7 +8,8 @@
     <link href="${base}/res/login/css/base.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="${base}/res/js/jquery.js"></script>
     <script>
-        var imgArr=['bg1.jpg','bg2.jpg','bg3.jpg','bg4.jpg'];
+        //var imgArr=['bg1.jpg','bg2.jpg','bg3.jpg','bg4.jpg'];
+        var imgArr=['bg4.jpg'];
         function switchBg(){
             var randomBgIndex = Math.floor(Math.random() * imgArr.length);
             var img_url='${base}/res/login/images/'+imgArr[randomBgIndex];
@@ -23,7 +24,7 @@
         $(function(){
             changeCaptcha();
             switchBg();
-            setInterval("switchBg()",5000);
+            //setInterval("switchBg()",50000);
             //跳出框架在主窗口登录
             if(top.location!=this.location)	top.location=this.location;
             $('#username').focus();
@@ -33,7 +34,7 @@
     </script>
 </head>
 
-<body class="login-page" style="">
+<body class="login-page" >
 <div class="login-content">
     <div class="login-panel">
         <p class="logo animate0 bounceIn">
